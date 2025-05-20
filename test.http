@@ -1,0 +1,29 @@
+### Create a new book
+POST http://localhost:3030/api/books
+Content-Type: application/json
+
+{
+  
+  "title": "The book name",
+  "author": "The book author",
+  "edition": "1st Edition",
+  "year": "1900"
+}
+
+
+### Update book info (partial update)
+PUT http://localhost:3030/api/books/example2
+Content-Type: application/json
+
+{
+  "title": "Updated Book Name",
+  "author": "Updated Author",
+  "pages": "1200",
+  "edition": "2nd Edition",
+  "year": "2025"
+}
+
+### Delete
+DELETE http://localhost:3030/api/books/example2
+Content-Type: application/json
+
