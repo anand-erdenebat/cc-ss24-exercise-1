@@ -12,51 +12,51 @@
 </head>
 
 <body>
-  <div class="d-header">
-    <h4>Cloud Computing Exercise Website</h4>
+<div class="d-header">
+  <h4>Cloud Computing Exercise Website</h4>
+</div>
+<div class="main small-screen">
+  <div hx-get="/books" hx-trigger="click" hx-target="#page-content" class="p-pointer">
+    <span style="padding: 8px 0px; display: block;">Books</span>
   </div>
-  <div class="main small-screen">
-    <div hx-get="/books" hx-trigger="click" hx-target="#page-content" class="p-pointer">
-      <span style="padding: 8px 0px; display: block;">Books</span>
-    </div>
-    <div hx-get="/authors" hx-trigger="click" hx-target="#page-content" class="p-pointer">
-      <span style="padding: 8px 0px; display: block;">Authors</span>
-    </div>
-    <div hx-get="/years" hx-trigger="click" hx-target="#page-content" class="p-pointer">
-      <span style="padding: 8px 0px; display: block;">Years</span>
-    </div>
-    <div hx-get="/search" hx-trigger="click" hx-target="#page-content" class="p-pointer">
-      <span style="padding: 8px 0px; display: block;">Search</span>
-    </div>
-    <div hx-get="/create" hx-trigger="click" class="p-pointer">
-      <span style="padding: 8px 0px; display: block;">Create</span>
-    </div>
+  <div hx-get="/authors" hx-trigger="click" class="p-pointer">
+    <span style="padding: 8px 0px; display: block;">Authors</span>
   </div>
-  <div id="page-content" class="page-content"></div>
-  <footer>
-    <small>
-      Made with love from Garching for Cloud Computing
-    </small>
-    <br />
-    <small>
-      CAPS Cloud © 2024
-    </small>
-  </footer>
-  <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-      document.body.addEventListener('htmx:beforeSwap', function (evt) {
-        if (evt.detail.xhr.status === 422) {
-          // allow 422 responses to swap as we are using this as a signal that
-          // a form was submitted with bad data and want to rerender with the
-          // errors
-          //
-          // set isError to false to avoid error logging in console
-          evt.detail.shouldSwap = true;
-          evt.detail.isError = false;
-        }
-      });
-    })
-  </script>
+  <div hx-get="/years" hx-trigger="click" class="p-pointer">
+    <span style="padding: 8px 0px; display: block;">Years</span>
+  </div>
+  <div hx-get="/search" hx-trigger="click" hx-target="#page-content" class="p-pointer">
+    <span style="padding: 8px 0px; display: block;">Search</span>
+  </div>
+  <div hx-get="/create" hx-trigger="click" class="p-pointer">
+    <span style="padding: 8px 0px; display: block;">Create</span>
+  </div>
+</div>
+<div id="page-content" class="page-content"></div>
+<footer>
+  <small>
+    Made with love from Garching for Cloud Computing
+  </small>
+  <br />
+  <small>
+    CAPS Cloud © 2024
+  </small>
+</footer>
+<script>
+  document.addEventListener("DOMContentLoaded", (event) => {
+    document.body.addEventListener('htmx:beforeSwap', function (evt) {
+      if (evt.detail.xhr.status === 422) {
+        // allow 422 responses to swap as we are using this as a signal that
+        // a form was submitted with bad data and want to rerender with the
+        // errors
+        //
+        // set isError to false to avoid error logging in console
+        evt.detail.shouldSwap = true;
+        evt.detail.isError = false;
+      }
+    });
+  })
+</script>
 </body>
 
 </html>
@@ -82,35 +82,26 @@
 </table>
 {{ end }}
 
-{{ block "authors" . }}
-<table>
-  <tr>
-    <th>Author</th>
-  </tr>
-  {{ range . }}
-  <tr id="row-{{ .ID }}">
-    <th> {{ .BookAuthor }} </th>
-  </tr>
-  {{ end }}
-</table>
-{{ end }}
-
-{{ block "years" . }}
-<table>
-  <tr>
-    <th>Years</th>
-  </tr>
-  {{ range . }}
-  <tr id="row-{{ .ID }}">
-    <th> {{ .BookYear }} </th>
-  </tr>
-  {{ end }}
-</table>
-{{ end }}
 
 {{ block "search-bar" . }}
 <div class="input_wrap">
   <input type="text" required />
   <label>Search parameter</label>
 </div>
+{{ end }}
+
+{{ block "authors" . }}
+<ul>
+  {{ range . }}
+  <li>{{ . }}</li>
+  {{ end }}
+</ul>
+{{ end }}
+
+{{ block "years" . }}
+<ul>
+  {{ range . }}
+  <li>{{ . }}</li>
+  {{ end }}
+</ul>
 {{ end }}
